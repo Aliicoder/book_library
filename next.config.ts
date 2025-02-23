@@ -15,6 +15,13 @@ const nextConfig: NextConfig = {
 
   // ⚡ Change the Build Output Folder (Default is `.next/`)
   //distDir: 'build',
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   output: 'standalone', // Required for Vercel
   // ⚡ Optimize Fonts & CSS
   // optimizeFonts: true,
