@@ -1,7 +1,7 @@
-import { IBook } from '@/types'
 import Link from 'next/link'
 import React from 'react'
 import BookCover from './BookCover'
+import { IBook } from '@/utils/types'
 interface IBooksList {
   className: string
   title: string
