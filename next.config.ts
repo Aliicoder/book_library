@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
   // swcMinify: true,
 
   // ⚡ Change the Build Output Folder (Default is `.next/`)
-  distDir: 'build',
+  //distDir: 'build',
   output: 'standalone', // Required for Vercel
   // ⚡ Optimize Fonts & CSS
   // optimizeFonts: true,
