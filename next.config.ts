@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
 
   // ⚡ Change the Build Output Folder (Default is `.next/`)
   distDir: 'build',
-
+  output: 'standalone', // Required for Vercel
   // ⚡ Optimize Fonts & CSS
   // optimizeFonts: true,
   // optimizeCss: true,
@@ -30,8 +30,7 @@ const nextConfig: NextConfig = {
 
   // ⚡ Experimental Features (Uncomment to Enable)
   experimental: {
-    // appDir: true, // Enable App Router (`app/` directory)
-    // scrollRestoration: true, // Maintain Scroll Position
+    // =scrollRestoration: true, // Maintain Scroll Position
   },
 
   // ⚡ Customize Webpack (Fix fs Issues in Client Side Code)
