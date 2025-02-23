@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 
 const Header = ({ className }: { className: string }) => {
   const pathname = usePathname()
-  const { data: session, status } = useSession()
+  const user = useSession().data?.user
   const router = useRouter()
   return (
     <header className={className}>
@@ -35,7 +35,7 @@ const Header = ({ className }: { className: string }) => {
           onClick={() => router.push('/profile')}
           className="w-10  aspect-square flex justify-center items-center border-light-200 rounded-full border"
         >
-          <h1>{getInitials(session?.user?.name!)}</h1>
+          <h1>{user && getInitials(user?.name!)}</h1>
         </div>
       </div>
     </header>

@@ -3,6 +3,8 @@ import { db } from '@/database/drizzle'
 import { users } from '@/database/schemas'
 import { signIn } from '@/lib/authjs/auth'
 import ratelimit from '@/lib/upstash/ratelimit'
+import { workflowClient } from '@/lib/upstash/workflow'
+import config from '@/utils/config'
 import { AuthCredentials } from '@/utils/types'
 import { hash } from 'bcryptjs'
 import { eq } from 'drizzle-orm'
@@ -46,5 +48,12 @@ export const signup = async (reqBody: AuthCredentials) => {
   } catch (error) {
     return { statusCode: 400, status: 'failed', message: `signup error ${error} ` }
   }
+  await workflowClient.trigger({
+    url: `${config.env.apiEndpoint}`,
+    body: {
+      email,
+      fullName,
+    },
+  })
   await signinWithCredentials({ email, password })
 }
