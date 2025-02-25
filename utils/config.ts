@@ -1,6 +1,6 @@
 export default {
   env: {
-    apiEndpoint: process.env.NEXT_API_ENDPOINT!,
+    apiEndpoint: process.env.NEXT_PUBLIC_API_ENDPOINT!,
     imagekit: {
       urlEndpoint: process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT!,
       publickey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY!,

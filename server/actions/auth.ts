@@ -28,7 +28,7 @@ export const signinWithCredentials = async ({
 }
 export const signup = async (reqBody: AuthCredentials) => {
   const ip = (await headers()).get('x-forwarded-for') || '127.0.0.1'
-  const { success, remaining } = await ratelimit.limit(ip)
+  const { success } = await ratelimit.limit(ip)
   if (!success) return redirect('/too-fast')
   const { fullName, email, password, universityId, universityCard } = reqBody
   if (!fullName || !email || !password || !universityId || !universityCard)
@@ -49,7 +49,7 @@ export const signup = async (reqBody: AuthCredentials) => {
     return { statusCode: 400, status: 'failed', message: `signup error ${error} ` }
   }
   await workflowClient.trigger({
-    url: `${config.env.apiEndpoint}`,
+    url: `${config.env.apiEndpoint}/workflows/onboarding`,
     body: {
       email,
       fullName,
