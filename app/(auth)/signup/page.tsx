@@ -15,9 +15,9 @@ import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import ImageUpload from '@/components/ImageUpload'
 import { signupValidation } from '@/utils/validations'
-import { signup } from '@/server/actions/auth'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
+import { signup } from '@/app/api/actions/auth'
 
 const page = () => {
   const router = useRouter()
@@ -27,17 +27,26 @@ const page = () => {
 
   async function onSubmit(values: z.infer<typeof signupValidation>) {
     try {
-      const result: any = await signup(values)
-      console.log('signup ', result?.message ?? 'request succeeded')
+      console.log('values ', values)
+      const result = await signup(values)
+      if (result.status === 'success') {
+        toast.success(result?.message)
+        router.push('/')
+      } else {
+        toast.error(result?.message)
+      }
     } catch (error: any) {
-      console.log('signup ', error)
-      toast.error(error?.message ?? 'request failed')
+      toast.error(error?.message ?? 'unknown error')
     }
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 max-w-3xl mx-auto py-10">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-3 mx-auto py-10
+        md:w-[350px] "
+      >
         <FormField
           control={form.control}
           name="fullName"
@@ -103,9 +112,16 @@ const page = () => {
           name="universityCard"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Upload University ID Card </FormLabel>
               <FormControl>
-                <ImageUpload onFileChange={field.onChange} />
+                <ImageUpload
+                  className=" w-full"
+                  variant="dark"
+                  type="image"
+                  placeholder="upload cover image"
+                  folder="ids"
+                  accept="image/png,image/jpeg"
+                  onFileChange={field.onChange}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

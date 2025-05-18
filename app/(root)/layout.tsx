@@ -22,13 +22,11 @@ const Layout = async ({ children }: { children: ReactNode }) => {
       .where(eq(users.id, session?.user?.id as string))
   })
   return (
-    <main
-      className="flex min-h-screen flex-1 flex-col bg-pattern bg-cover bg-top bg-dark-100 px-10 text-white 
-      md:px-16"
-    >
+    <main className="flex text-base min-h-screen w-full flex-col bg-pattern bg-cover bg-top bg-dark-100 px-10 text-white">
       <div className="container mx-auto ">
-        <Header className="my-10 flex justify-between items-center" />
-        <div className="gap-20 flex flex-col">{children}</div>
+        <Header />
+        <div className="gap-16 flex flex-col">{children}</div>
+        <div className="h-16" />
       </div>
     </main>
   )

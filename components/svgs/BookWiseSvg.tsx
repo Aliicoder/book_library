@@ -1,5 +1,3 @@
-import React from 'react'
-
 const BookWiseSvg = ({ color = '#FAFBFF', className = '' }) => {
   return (
     <svg

@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 import BookCoverSvg from './svgs/BookCoverSvg'
 import { cn } from '@/lib/utils'
+import config from '@/utils/config'
 type BookCoverVariants = 'extraSmall' | 'small' | 'medium' | 'regular' | 'wide'
 const variantStyles: Record<BookCoverVariants, string> = {
   extraSmall: 'w-[28.95px] h-10',
@@ -26,7 +27,12 @@ const BookCover = ({
     <div className={cn('relative transition-all duration-300', variantStyles[variant], className)}>
       <BookCoverSvg coverColor={bookColor} />
       <div style={{ left: '12%', width: '87.5%', height: '85%' }} className="absolute z-10">
-        <Image src={bookCoverUrl} alt="book cover" fill className="rounded-sm object-fill" />
+        <Image
+          src={`${config.env.imagekit.urlEndpoint}/${bookCoverUrl}`}
+          alt="book cover"
+          fill
+          className="rounded-sm object-fill"
+        />
       </div>
     </div>
   )

@@ -14,16 +14,8 @@ export default {
         'bebas-neue': ['var(--bebas-neue)'],
       },
       fontSize: {
-        'fs-61': 'clamp(3.0625rem, 2.8653rem + 0.986vw, 3.8125rem)',
-        'fs-49': 'clamp(2.4375rem, 2.2732rem + 0.8217vw, 3.0625rem)',
-        'fs-39': 'clamp(1.9375rem, 1.806rem + 0.6574vw, 2.4375rem)',
-        'fs-31': 'clamp(1.5625rem, 1.4639rem + 0.493vw, 1.9375rem)',
-        'fs-25': 'clamp(1.25rem, 1.1678rem + 0.4108vw, 1.5625rem)',
-        'fs-20': 'clamp(1rem, 0.9343rem + 0.3287vw, 1.25rem)',
-        'fs-16': 'clamp(0.8125rem, 0.7632rem + 0.2465vw, 1rem)',
-        'fs-13': 'clamp(0.625rem, 0.5757rem + 0.2465vw, 0.8125rem)',
-        'fs-10': 'clamp(0.5rem, 0.4671rem + 0.1643vw, 0.625rem)',
-        'fs-8': 'clamp(0.4375rem, 0.4211rem + 0.0822vw, 0.5rem)',
+        '2xs': '0.625rem', // 10px
+        '3xs': '0.5rem', // 8px
       },
       colors: {
         background: 'hsl(var(--background))',
@@ -119,5 +111,5 @@ export default {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [require('tailwindcss-animate'), require('daisyui')],
 } satisfies Config

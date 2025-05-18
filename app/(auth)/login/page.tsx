@@ -14,9 +14,9 @@ import {
 import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import { loginValidation } from '@/utils/validations'
-import { signinWithCredentials } from '@/server/actions/auth'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
+import { signinWithCredentials } from '@/app/api/actions/auth'
 
 const page = () => {
   const router = useRouter()
@@ -26,17 +26,27 @@ const page = () => {
 
   async function onSubmit(values: z.infer<typeof loginValidation>) {
     try {
+      console.log(values)
       const result = await signinWithCredentials(values)
-      toast.success(result?.message ?? 'request succeeded')
-      router.push('/')
+      console.log(result)
+      if (result.status === 'success') {
+        toast.success(result?.message)
+        router.push('/')
+      } else {
+        toast.error(result?.message)
+      }
     } catch (error: any) {
-      console.log('login ', error)
-      toast.error(error?.message ?? 'request failed')
+      console.log('login failed')
+      toast.error(error?.message ?? 'unknown error')
     }
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 max-w-3xl py-10">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-3 py-10
+      md:w-[350px]"
+      >
         <FormField
           control={form.control}
           name="email"
@@ -67,7 +77,7 @@ const page = () => {
           )}
         />
 
-        <div className="pt-3">
+        <div className="pt-6">
           <Button className="w-full text-black" type="submit">
             Login
           </Button>
