@@ -19,9 +19,9 @@ const nextConfig: NextConfig = {
   // typescript: {
   //   ignoreBuildErrors: true,
   // },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // eslint: {
+  //   ignoreDuringBuilds: true,
+  // },
 
   //output: 'standalone', // Required for Vercel
   // ⚡ Optimize Fonts & CSS
