@@ -1,7 +1,7 @@
 import { db } from '@/database/drizzle'
 import { books, borrowRecords, users } from '@/database/schemas'
 import { CatchAsyncError } from '@/utils/Errors'
-import { eq, ne, sql, sum } from 'drizzle-orm'
+import { eq, ne, sql } from 'drizzle-orm'
 
 export const GET = CatchAsyncError(async () => {
   const usersCount = await db

@@ -5,7 +5,6 @@ import { NextRequest } from 'next/server'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
-  console.log('searchParams ', searchParams)
 
   const page = parseInt(searchParams.get('page') || '1')
   const limit = parseInt(searchParams.get('limit') || '10')
