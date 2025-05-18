@@ -1,6 +1,5 @@
 'use server'
 import { CatchAsyncError, ExtendedError } from '@/utils/Errors'
-import { handleRateLimit } from './auth'
 import { db } from '@/database/drizzle'
 import { users } from '@/database/schemas'
 import { eq } from 'drizzle-orm'
@@ -10,8 +9,6 @@ export const approveAccount = CatchAsyncError(async ({ userId }: { userId: strin
   if (!userId) {
     throw new ExtendedError('invalid request', 403)
   }
-
-  await handleRateLimit()
 
   const user = (await db.select().from(users).where(eq(users.id, userId)).limit(1))[0]
 

@@ -1,6 +1,5 @@
 'use server'
 import { CatchAsyncError, ExtendedError } from '@/utils/Errors'
-import { handleRateLimit } from './auth'
 import { db } from '@/database/drizzle'
 import { borrowRecords } from '@/database/schemas'
 import { eq } from 'drizzle-orm'
@@ -9,8 +8,6 @@ import dayjs from 'dayjs'
 
 export const confirmBorrowRequestAction = CatchAsyncError(
   async ({ recordId, path }: { recordId: string; path: string }) => {
-    await handleRateLimit()
-
     if (!recordId) {
       throw new ExtendedError('invalid request', 400)
     }
@@ -36,8 +33,6 @@ export const confirmBorrowRequestAction = CatchAsyncError(
 )
 export const deleteRecordAction = CatchAsyncError(
   async ({ recordId, path }: { recordId: string; path: string }) => {
-    await handleRateLimit()
-
     if (!recordId) {
       throw new ExtendedError('invalid request', 400)
     }
