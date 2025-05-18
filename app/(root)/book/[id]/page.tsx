@@ -5,9 +5,13 @@ import { books } from '@/database/schemas'
 import { eq, ne } from 'drizzle-orm'
 import { redirect } from 'next/navigation'
 import React from 'react'
-
-const Page = async ({ params }: { params: { id: string } }) => {
-  const { id } = await params
+interface PageProps {
+  params: {
+    id: string
+  }
+}
+const Page = async ({ params }: PageProps) => {
+  const { id } = params
 
   const book = (await db.select().from(books).where(eq(books.id, id)))[0]
   if (!book) return redirect('/not-found')
